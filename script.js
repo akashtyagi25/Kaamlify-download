@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, setting up download functionality...');
     
     // Test if APK file is accessible
-    fetch('Kaamlify1.apk', { method: 'HEAD' })
+    fetch('Kaamlify.apk', { method: 'HEAD' })
         .then(response => {
             console.log(`📁 APK file test: ${response.status} - ${response.ok ? 'File accessible' : 'File not accessible'}`);
             if (response.ok) {
@@ -200,8 +200,8 @@ function downloadAPK() {
     try {
         // Only use Method 1: Direct download link (most reliable)
         const link = document.createElement('a');
-        link.href = 'Kaamlify1.apk';
-        link.download = 'Kaamlify1.apk';
+        link.href = 'Kaamlify.apk';
+        link.download = 'Kaamlify.apk';
         link.style.display = 'none';
         
         document.body.appendChild(link);
@@ -234,8 +234,8 @@ function attemptDownload() {
     try {
         // Method 1: Standard download link
         const link = document.createElement('a');
-        link.href = 'Kaamlify1.apk';
-        link.download = 'Kaamlify1.apk';
+        link.href = 'Kaamlify.apk';
+        link.download = 'Kaamlify.apk';
         link.style.display = 'none';
         
         document.body.appendChild(link);
@@ -252,7 +252,7 @@ function attemptDownload() {
         // Method 3: Window.open (fallback)
         setTimeout(() => {
             console.log('💾 Trying Method 3: Window.open...');
-            window.open('Kaamlify1.apk', '_blank');
+            window.open('Kaamlify.apk', '_blank');
         }, 2000);
         
         // Cleanup
@@ -275,7 +275,7 @@ function attemptDownload() {
 
 // Fetch-based download method
 function downloadWithFetch() {
-    fetch('Kaamlify1.apk')
+    fetch('Kaamlify.apk')
         .then(response => {
             console.log('📥 Fetch response status:', response.status);
             if (!response.ok) throw new Error('Network response was not ok');
@@ -286,7 +286,7 @@ function downloadWithFetch() {
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'Kaamlify1.apk';
+            link.download = 'Kaamlify.apk';
             link.style.display = 'none';
             
             document.body.appendChild(link);
@@ -316,7 +316,7 @@ function showSuccessNotification() {
             <i class="fas fa-check-circle"></i>
             <div class="notification-text">
                 <strong>Download Started!</strong>
-                <span>Check your downloads folder for Kaamlify1.apk</span>
+                <span>Check your downloads folder for Kaamlify.apk</span>
             </div>
         </div>
     `;
@@ -401,7 +401,7 @@ function showAPKDownloadNotification() {
     notification.innerHTML = `
         <div class="notification-content">
             <i class="fab fa-android"></i>
-            <span>Downloading Kaamlify1.apk...</span>
+            <span>Downloading Kaamlify.apk...</span>
         </div>
     `;
     
@@ -435,11 +435,11 @@ function showAPKDownloadNotification() {
 
 // Track APK Download
 function trackAPKDownload() {
-    console.log('APK download tracked: Kaamlify1.apk');
+    console.log('APK download tracked: Kaamlify.apk');
     
     // Example: Google Analytics tracking
     // gtag('event', 'download', {
-    //     'file_name': 'Kaamlify1.apk',
+    //     'file_name': 'Kaamlify.apk',
     //     'file_type': 'apk',
     //     'platform': 'android'
     // });
