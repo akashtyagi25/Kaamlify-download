@@ -586,6 +586,32 @@ body {
     line-height: 1.6;
 }
 
+.btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #E1306C, #F56040, #FCAF45);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(225, 48, 108, 0.4);
+    background: linear-gradient(45deg, #C13584, #E1306C, #F56040);
+}
+
+.btn-instagram i {
+    font-size: 1.2rem;
+}
+
 .download-buttons {
     display: flex;
     gap: 1rem;
@@ -1071,41 +1097,6 @@ body {
     padding-top: 1rem;
     text-align: center;
     color: #666;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.footer-bottom .social-links {
-    display: flex;
-    justify-content: center;
-}
-
-.footer-bottom .social-links a {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-    font-size: 1.2rem;
-}
-
-.footer-bottom .social-links a:hover {
-    transform: translateY(-3px);
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-}
-
-@media (min-width: 768px) {
-    .footer-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-    }
 }
 
 /* Responsive Design */
