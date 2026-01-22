@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaamlify - Developer Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 480px;
+            background: #1E1E1E;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            display: none;
+            /* Hidden until loaded */
+            margin: 20px;
+        }
+
+        .avatar-section {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1E1E1E;
+            box-shadow: 0 0 0 2px #333;
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 35%;
+            color: #4CAF50;
+            background: #1E1E1E;
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 8px 0 4px;
+        }
+
+        .role {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 16px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            padding: 16px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .about-section {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .about-text {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .skill-chip {
+            background: #333;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ddd;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn {
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: white;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: end;
+            /* Bottom sheet style on mobile */
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #252525;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 24px 24px 0 0;
+            padding: 30px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        @media (min-width: 500px) {
+            .modal-overlay {
+                align-items: center;
+            }
+
+            .modal-content {
+                border-radius: 24px;
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            .modal-overlay.active .modal-content {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: #aaa;
+            margin-bottom: 24px;
+        }
+
+        .app-store-btn {
+            background: #444;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: #666;
+            margin-top: 16px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="loading-spinner" id="loader">
+        <ion-icon name="sync-outline" class="spin"
+            style="font-size: 40px; animation: spin 1s linear infinite;"></ion-icon>
+        <p>Loading Profile...</p>
+    </div>
+
+    <div class="profile-container" id="profileCard">
+        <div class="avatar-section">
+            <img src="https://via.placeholder.com/150" alt="Avatar" class="avatar" id="pAvatar">
+            <ion-icon name="checkmark-circle" class="verified-badge" id="pVerified" style="display: none;"></ion-icon>
+        </div>
+
+        <h1 class="name" id="pName">User Name</h1>
+        <p class="role" id="pRole">Developer</p>
+
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-val" id="pFollowers">0</span>
+                <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-val" id="pProjects">0</span>
+                <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-val" id="pRating">New</span>
+                <span class="stat-label">Rating</span>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <p class="about-text" id="pAbout">No bio available.</p>
+        </div>
+
+        <div class="skills-container" id="pSkills">
+            <!-- Chips will be here -->
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary open-modal-btn">
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon> Message
+            </button>
+            <button class="btn btn-primary open-modal-btn">
+                Hire Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="appModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+            <h3 class="modal-title">Get the Full Experience</h3>
+            <p class="modal-text">Download the Kaamlify app to chat, hire, and connect with <span
+                    id="modalUserName">this developer</span>.</p>
+
+            <a href="#" class="btn btn-primary"
+                style="justify-content: center; text-decoration: none; margin-bottom: 10px;">
+                Download App
+            </a>
+
+            <button class="close-modal" id="closeModalBtn">Continue on Web (View Only)</button>
+        </div>
+    </div>
+
+    <script type="module" src="profile.js"></script>
+
+    <style>
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</body>
+
+</html>
